@@ -1,12 +1,82 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import React, { useState } from 'react';
 import {Picker} from '@react-native-picker/picker';
+import { Ionicons } from '@expo/vector-icons';
 
+const Tab = createBottomTabNavigator();
+
+
+// -----------------------Main app bringing the two pages together ---------------------------
 
 const App = () => {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={{
+          tabBarStyle: {
+            backgroundColor: 'white',
+            borderTopWidth: 1,
+            borderTopColor: '#ccc',
+          },
+          tabStyle: {
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+          },
+          labelStyle: {
+            fontSize: 16,
+            marginLeft: 8,
+          },
+          tabBarLabelPosition: 'beside-icon', // Add this line
+        }}
+      >
+        <Tab.Screen 
+          name="Home Page"
+          component={Home} 
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="home" size={size} color={color} />
+            ),
+            tabBarLabel: 'Home',
+          }}
+        />
+        <Tab.Screen 
+          name="Visa Info" 
+          component={VisaInfo}    
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="settings" size={size} color={color} />
+            ),
+            tabBarLabel: 'Visa Info',
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+};
+
+// -----------------------Tab 1 (Inspiration of working abroad) ---------------------------
+
+const Home = () => {
+  return (
+  <ScrollView contentContainerStyle={styles.scrollViewContent}>
+    <View style={styles.app}>
+      <View style={styles.firstcontainer}>
+        <Text style={styles.descriptionhome}>Moving abroad can be one of the most exhilarating experiences of a lifetime. The thought of exploring new cultures, meeting new people, and discovering unfamiliar landscapes is enough to make anyone's heart race with excitement. It's a chance to challenge yourself in ways you never thought possible and to expand your worldview.</Text>
+        <Text style={styles.descriptionhome}>The idea of starting fresh in a foreign land, learning a new language, and immersing yourself in a new way of life is not only adventurous but also incredibly rewarding. So, pack your bags, take a deep breath, and get ready to embark on an adventure of a lifetime by moving abroad.</Text>
+        <Text style={styles.descriptionhome}>To be completely honest this is just a starting of the app and if you want more features and more countries let me know! I was looking at adding a feature that builds a community for helping people move abroad and really live and see the world we are on. Because isn't it a bueatiful place. </Text>      
+        <Text style={styles.descriptionhome}>Let me know at montybaring@gmail.com</Text>
+     </View>
+    </View>
+  </ScrollView>
+  );
+};
+
+// ---------------------Tab 2 (Visa information)-----------
+
+const VisaInfo = () => {
   const [selectedOption1, setSelectedOption1] = useState('option1');
   const [selectedOption2, setSelectedOption2] = useState('option1');
 
@@ -46,14 +116,14 @@ const App = () => {
   } else if (selectedOption1 === 'option1' && selectedOption2 === 'option7') {
     paragraph = 'As a UK citizen, you can visit Bali, Indonesia for up to 30 days without a visa, as long as you are entering for tourism purposes only. If you plan to stay in Bali for more than 30 days or engage in any kind of work or business activity, you will need to obtain a visa.\n\nTo obtain a visa to stay in Bali for a longer period of time, you can apply for a social/cultural visa, which is valid for up to 60 days and can be extended up to 4 times for 30 days each time. To apply for a social/cultural visa, you will need to go to the Indonesian embassy or consulate in your home country and provide the necessary documents, including a sponsorship letter from an Indonesian sponsor, a valid passport, and proof of financial support.\n\nIf you plan to work or engage in business activity in Bali, you will need to obtain a work permit and a business visa. To obtain a work permit, you will need to have a job offer from an Indonesian company and meet certain requirements. To obtain a business visa, you will need to have a business sponsor in Indonesia and provide the necessary documents, including a valid passport, a sponsorship letter, and proof of financial support.\n\nIt\'s important to note that Bali, like the rest of Indonesia, has its own unique cultural and legal practices, so it\'s a good idea to familiarize yourself with local customs and laws before traveling there. It\'s also important to make sure you have adequate health insurance coverage and to take necessary health precautions, such as getting required vaccinations and taking precautions against mosquito-borne illnesses.';
   } else if (selectedOption1 === 'option1' && selectedOption2 === 'option6') {
-    paragraph = 'As a UK citizen, you can visit Australia for up to 3 months as a tourist without the need for a visa. If you plan to work, study or stay in Australia for a longer period of time, you will need to apply for the appropriate visa.\n\nThere are a variety of visas available for UK citizens who want to work, study or live in Australia, including:\n\n•Working Holiday visa: This visa allows UK citizens between the ages of 18 and 30 to work and travel in Australia for up to 12 months.\n•Skilled Worker visa: This visa is for skilled workers who have been nominated by an Australian employer and meet the requirements for a particular occupation.\n•Student visa: This visa allows UK citizens to study at an Australian educational institution for a specified period of time.\n\nTo apply for any of these visas, you will need to meet certain requirements, such as demonstrating a certain level of proficiency in English and providing evidence of sufficient financial resources to support yourself during your stay.\n\nIt\'s also important to familiarize yourself with the Australian tax system before you begin working in the country. You will need to pay income tax on any money you earn in Australia, and you may be eligible for certain tax credits and deductions. You can find more information about the Australian tax system on the Australian Taxation Office website.\n\nIt\'s important to note that the Australian government regularly updates its immigration policies and visa requirements, so it\'s a good idea to check the official Australian government immigration website or consult with an immigration lawyer for the most up-to-date information.';
+    paragraph = 'As a UK citizen, you can visit Australia for up to 3 months as a tourist without the need for a visa. If you plan to work, study or stay in Australia for a longer period of time, you will need to apply for the appropriate visa.\n\nThere are a variety of visas available for UK citizens who want to work, study or live in Australia, including:\n\n• Working Holiday visa: This visa allows UK citizens between the ages of 18 and 30 to work and travel in Australia for up to 12 months.\n• Skilled Worker visa: This visa is for skilled workers who have been nominated by an Australian employer and meet the requirements for a particular occupation.\n• Student visa: This visa allows UK citizens to study at an Australian educational institution for a specified period of time.\n\nTo apply for any of these visas, you will need to meet certain requirements, such as demonstrating a certain level of proficiency in English and providing evidence of sufficient financial resources to support yourself during your stay.\n\nIt\'s also important to familiarize yourself with the Australian tax system before you begin working in the country. You will need to pay income tax on any money you earn in Australia, and you may be eligible for certain tax credits and deductions. You can find more information about the Australian tax system on the Australian Taxation Office website.\n\nIt\'s important to note that the Australian government regularly updates its immigration policies and visa requirements, so it\'s a good idea to check the official Australian government immigration website or consult with an immigration lawyer for the most up-to-date information.';
   }
 
   return (
     <View>
-      <View style={styles.banner}>
+      {/* <View style={styles.banner}>
         <Text style={styles.bannerText}>Test banner</Text>
-      </View>
+      </View> */}
 
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.app}>
@@ -76,7 +146,7 @@ const App = () => {
               selectedValue={selectedOption2}
               onValueChange={handleOption2Change}
             >
-              {/* <Picker.Item label="UK" value="option1" /> */}
+              <Picker.Item label="UK" value="option1" />
               <Picker.Item label="France" value="option2" />
               <Picker.Item label="Germany" value="option3" />
               <Picker.Item label="Spain" value="option4" />
@@ -103,7 +173,7 @@ const App = () => {
 const styles = StyleSheet.create({
   app: {
     flex: 1,
-    backgroundColor: '#D3D3D3',
+    backgroundColor: '#001F3F',
   },
   scrollViewContent: {
     flexGrow: 1,
@@ -118,10 +188,19 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 10,
   },
+  firstcontainer: {
+    borderRadius: 10,
+    backgroundColor: '#FFFFFF',
+    padding: 10,
+    marginBottom: 30,
+    marginHorizontal:20,
+    marginTop:20,
+  },
   label: {
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 5,
+    marginHorizontal:6,
   },
   paragraphbox: {    
     borderRadius: 0,
@@ -137,7 +216,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   bannerText: {
-    color: '#023020',
+    color: '#001F3F',
     fontWeight: 'bold',
     fontSize: 25,
     marginTop: 30,
@@ -156,6 +235,13 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginBottom: 10,
   },
+  descriptionhome:{
+    fontSize:16,
+    marginHorizontal:20,
+    marginTop:20,
+    marginBottom:20,
+  },
+
 });
 
 export default App;
